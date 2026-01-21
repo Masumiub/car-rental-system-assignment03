@@ -33,7 +33,7 @@ The Entity Relationship Diagram illustrates the core structure of the Vehicle Re
 ### Users Table
 | Column | Type | Constraints | Description |
 |--------|------|-------------|-------------|
-| user_id | SERIAL | PRIMARY KEY | Auto-incremented unique identifier |
+| user_id | INT | PRIMARY KEY | Auto-incremented unique identifier |
 | name | VARCHAR(100) | NOT NULL | Full name of user |
 | email | VARCHAR(100) | UNIQUE, NOT NULL | Unique email address |
 | password | VARCHAR(255) | NOT NULL | Hashed password for authentication |
@@ -43,7 +43,7 @@ The Entity Relationship Diagram illustrates the core structure of the Vehicle Re
 ### Vehicles Table
 | Column | Type | Constraints | Description |
 |--------|------|-------------|-------------|
-| vehicle_id | SERIAL | PRIMARY KEY | Auto-incremented unique identifier |
+| vehicle_id | INT | PRIMARY KEY | Auto-incremented unique identifier |
 | vehicle_name | VARCHAR(255) | NOT NULL | Name/model of vehicle |
 | type | VARCHAR(20) | CHECK('Car','Bike','Truck') | Type of vehicle |
 | model | VARCHAR(255) | | Model year/details |
@@ -54,7 +54,7 @@ The Entity Relationship Diagram illustrates the core structure of the Vehicle Re
 ### Bookings Table
 | Column | Type | Constraints | Description |
 |--------|------|-------------|-------------|
-| booking_id | SERIAL | PRIMARY KEY | Auto-incremented unique identifier |
+| booking_id | INT | PRIMARY KEY | Auto-incremented unique identifier |
 | user_id | INT | FOREIGN KEY → Users(user_id) | Reference to user |
 | vehicle_id | INT | FOREIGN KEY → Vehicles(vehicle_id) | Reference to vehicle |
 | start_date | DATE | NOT NULL | Rental start date |
