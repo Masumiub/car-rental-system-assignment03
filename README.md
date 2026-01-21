@@ -12,6 +12,8 @@ A comprehensive database solution for managing a vehicle rental business, includ
 ## 🗺️ ERD Design
 The Entity Relationship Diagram illustrates the core structure of the Vehicle Rental System:
 https://lucid.app/lucidchart/c2c8d97e-3d29-4ad4-bd71-2b3d03b80d24/edit?viewport_loc=-255%2C-199%2C1698%2C1959%2C0_0&invitationId=inv_88150742-2918-4e4f-be8a-35b0bbcc3a5d
+
+
 <img width="893" height="728" alt="Image" src="https://github.com/user-attachments/assets/5258f699-667f-4a86-aab4-fadc2b8b41a2" />
 
 
