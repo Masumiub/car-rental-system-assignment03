@@ -31,36 +31,13 @@ The Entity Relationship Diagram illustrates the core structure of the Vehicle Re
 ## 🗄️ Database Schema
 
 ### Users Table
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| user_id | INT | PRIMARY KEY | Auto-incremented unique identifier |
-| name | VARCHAR(100) | NOT NULL | Full name of user |
-| email | VARCHAR(100) | UNIQUE, NOT NULL | Unique email address |
-| password | VARCHAR(255) | NOT NULL | Hashed password for authentication |
-| phone_number | VARCHAR(50) | | Contact phone number |
-| role | VARCHAR(20) | CHECK('Admin','Customer') | User role in system |
+
 
 ### Vehicles Table
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| vehicle_id | INT | PRIMARY KEY | Auto-incremented unique identifier |
-| vehicle_name | VARCHAR(255) | NOT NULL | Name/model of vehicle |
-| type | VARCHAR(20) | CHECK('Car','Bike','Truck') | Type of vehicle |
-| model | VARCHAR(255) | | Model year/details |
-| registration_number | VARCHAR(255) | UNIQUE, NOT NULL | Unique license plate number |
-| rental_price_per_day | DECIMAL(8,2) | NOT NULL | Daily rental cost |
-| availability_status | VARCHAR(20) | CHECK('Available','Rented','Maintenance') | Current availability status |
+
 
 ### Bookings Table
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| booking_id | INT | PRIMARY KEY | Auto-incremented unique identifier |
-| user_id | INT | FOREIGN KEY → Users(user_id) | Reference to user |
-| vehicle_id | INT | FOREIGN KEY → Vehicles(vehicle_id) | Reference to vehicle |
-| start_date | DATE | NOT NULL | Rental start date |
-| end_date | DATE | NOT NULL | Rental end date |
-| status | VARCHAR(20) | CHECK('Pending','Confirmed','Completed','Cancelled') | Booking status |
-| total_cost | DECIMAL(8,2) | NOT NULL | Calculated total rental cost |
+
 
 ## 📊 SQL Queries Implementation
 
@@ -83,7 +60,7 @@ Query 2: EXISTS Operation
 Purpose: Identify vehicles that have never been booked.
 
 
-sql
+```sql
 SELECT 
     v.vehicle_id,
     v.vehicle_name, 
@@ -100,8 +77,9 @@ WHERE NOT EXISTS (
 );
 Query 3: WHERE Filtering
 Purpose: Find all available vehicles of a specific type (e.g., cars).
+```
 
-sql
+```sql
 SELECT 
     vehicle_id,
     vehicle_name AS name,  
@@ -115,8 +93,9 @@ WHERE type = 'car'
 AND availability_status = 'available';
 Query 4: GROUP BY with HAVING
 Purpose: Calculate booking frequency and identify popular vehicles.
+```
 
-sql
+```sql
 SELECT 
     v.vehicle_name,  
     COUNT(b.booking_id) AS total_bookings
@@ -124,71 +103,6 @@ FROM Vehicles v
 LEFT JOIN Bookings b ON v.vehicle_id = b.vehicle_id
 GROUP BY v.vehicle_id, v.vehicle_name
 HAVING COUNT(b.booking_id) > 2;
-🚀 Installation & Setup
-Prerequisites
-PostgreSQL 12+ or MySQL 8+
+```
 
-SQL Client (Beekeeper Studio, pgAdmin, MySQL Workbench)
 
-Git (for cloning repository)
-
-Quick Start
-Clone the repository:
-
-bash
-git clone https://github.com/yourusername/vehicle-rental-system.git
-cd vehicle-rental-system
-Execute the SQL file:
-
-bash
-# For PostgreSQL
-psql -U username -d database_name -f queries.sql
-
-# For MySQL
-mysql -u username -p database_name < queries.sql
-Or use your preferred SQL client to run queries.sql
-
-Testing
-Run individual queries from the SQL file to verify results match expected output.
-
-📁 Sample Data
-The database includes realistic sample data for testing:
-
-Users
-3 users (2 Customers, 1 Admin)
-
-Unique emails and secure passwords
-
-Vehicles
-4 vehicles (2 cars, 1 bike, 1 truck)
-
-Various availability statuses
-
-Different rental prices
-
-Bookings
-4 booking records
-
-Multiple status types (completed, confirmed, pending)
-
-Realistic date ranges and costs
-
-🔧 Technologies Used
-Database: PostgreSQL/MySQL
-
-ERD Tool: DrawSQL.app
-
-SQL Client: Beekeeper Studio
-
-Version Control: Git & GitHub
-
-Documentation: Markdown
-
-🏗️ Business Logic Implemented
-User Management: Role-based access (Admin/Customer)
-
-Vehicle Inventory: Unique registration numbers, availability tracking
-
-Booking System: Date validation, status tracking, cost calculation
-
-Data Integrity: Foreign key constraints, unique constraints, ENUM validation
