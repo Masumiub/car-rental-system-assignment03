@@ -31,20 +31,20 @@ The Entity Relationship Diagram illustrates the core structure of the Vehicle Re
 ## 🗄️ Database Schema
 
 ### Users Table
-
+<img width="663" height="134" alt="Image" src="https://github.com/user-attachments/assets/1562e9d9-73b6-47af-841b-bf3eef39d82a" />
 
 ### Vehicles Table
-
+<img width="721" height="148" alt="Image" src="https://github.com/user-attachments/assets/b53fc283-b6c4-40f7-a6f4-2d9b67d307bd" />
 
 ### Bookings Table
-
+<img width="665" height="156" alt="Image" src="https://github.com/user-attachments/assets/f12eb733-eaee-499b-a69a-f78fae2d1d0e" />
 
 ## 📊 SQL Queries Implementation
 
 ### Query 1: JOIN Operation
 **Purpose**: Retrieve complete booking information with customer and vehicle details.
 
-
+```sql
 SELECT 
     b.booking_id,
     u.name AS customer_name,
@@ -56,10 +56,13 @@ FROM Bookings b
 INNER JOIN Users u ON b.user_id = u.user_id
 INNER JOIN Vehicles v ON b.vehicle_id = v.vehicle_id
 ORDER BY b.booking_id;
-Query 2: EXISTS Operation
-Purpose: Identify vehicles that have never been booked.
+```
+<img width="662" height="168" alt="Image" src="https://github.com/user-attachments/assets/ab75dd06-8e66-4a9f-a1cd-673a251ae270" />
 
 
+
+### Query 2: EXISTS Operation
+**Purpose**: Identify vehicles that have never been booked.
 ```sql
 SELECT 
     v.vehicle_id,
@@ -75,10 +78,12 @@ WHERE NOT EXISTS (
     FROM Bookings b
     WHERE b.vehicle_id = v.vehicle_id
 );
-Query 3: WHERE Filtering
-Purpose: Find all available vehicles of a specific type (e.g., cars).
 ```
+<img width="743" height="104" alt="Image" src="https://github.com/user-attachments/assets/f43fb57b-db40-4583-9315-712d9046c86c" />
 
+
+### Query 3: WHERE Filtering
+**Purpose**: Find all available vehicles of a specific type (e.g., cars).
 ```sql
 SELECT 
     vehicle_id,
@@ -91,10 +96,12 @@ SELECT
 FROM Vehicles
 WHERE type = 'car' 
 AND availability_status = 'available';
-Query 4: GROUP BY with HAVING
-Purpose: Calculate booking frequency and identify popular vehicles.
 ```
+<img width="713" height="75" alt="Image" src="https://github.com/user-attachments/assets/495dd16f-0109-4f0e-9915-25811c08a24c" />
 
+
+### Query 4: GROUP BY with HAVING
+**Purpose**: Find the total number of bookings for each vehicle and display only those vehicles that have more than 2 bookings.
 ```sql
 SELECT 
     v.vehicle_name,  
@@ -104,5 +111,6 @@ LEFT JOIN Bookings b ON v.vehicle_id = b.vehicle_id
 GROUP BY v.vehicle_id, v.vehicle_name
 HAVING COUNT(b.booking_id) > 2;
 ```
+<img width="272" height="73" alt="Image" src="https://github.com/user-attachments/assets/6ed67323-5339-4323-9f09-6751745574ef" />
 
 
